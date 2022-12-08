@@ -16,5 +16,14 @@ fetch(`${baseURL}/beers/1`)
 
   const beerDescription = document.getElementById("beer-description");
   beerDescription.textContent = data.description;
+
+  const beerReviews = document.getElementById("review-list")
+  beerReviews.replaceChildren()
+  const reviews = data.reviews
+  for (const review of reviews){
+    const listReview = document.createElement("li")
+    listReview.textContent = review;
+    beerReviews.appendChild(listReview)
+  }
 })
 .catch(err => console.log("Error: ", err))
