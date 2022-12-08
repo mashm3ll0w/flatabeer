@@ -13,5 +13,8 @@ fetch(`${baseURL}/beers/1`)
   const beerImage = document.getElementById("beer-image");
   beerImage.setAttribute("src", data.image_url);
   beerImage.setAttribute("alt", data.name);
+
+  const beerDescription = document.getElementById("beer-description");
+  beerDescription.textContent = data.description;
 })
 .catch(err => console.log("Error: ", err))
