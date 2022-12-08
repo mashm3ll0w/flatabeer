@@ -5,7 +5,10 @@ const baseURL = "http://localhost:3000/beers"
 fetchDisplayBeer(1);
 
 // 2. Show a menu of all beers
-showMenu()
+showMenu();
+
+// 3. Add New Review
+addNewReview();
 
 // 1. Function to fetch the beer that will get displayed as the default
 function fetchDisplayBeer(index){
@@ -55,4 +58,25 @@ function showMenu(){
   }
   })
   .catch(err => console.log("Error: ", err))
+}
+
+
+// 3. Add a review when the review form is submitted
+function addNewReview(){
+    const submitReviewBtn = document.querySelector("#review-form button")
+    submitReviewBtn.addEventListener("click", (e) => {
+      e.preventDefault()
+
+    const review = document.getElementById("review");
+    
+    // create a <li></li> and assign it the text entered in the textarea
+    const reviewListItem = document.createElement("li")
+    reviewListItem.textContent = review.value;
+    
+    const beerReviews = document.getElementById("review-list");
+    beerReviews.appendChild(reviewListItem);
+    
+    // clear the value entered in the text area
+    review.value = ""
+  })
 }
