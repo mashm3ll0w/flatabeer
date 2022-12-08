@@ -10,6 +10,9 @@ showMenu();
 // 3. Add New Review
 addNewReview();
 
+// 4. Display Menu Beer
+displayMenuBeer();
+
 // 1. Function to fetch the beer that will get displayed as the default
 function fetchDisplayBeer(index){
   fetch(`${baseURL}/${index}`)
@@ -54,6 +57,7 @@ function showMenu(){
     listBeer.textContent = beerName
     // add a dataset as an attribute inorder to use that index when fetching a beer from the database
     listBeer.dataset.beerIndex = beerNames.indexOf(beerName) + 1;
+    listBeer.classList.add("beer-menu")
     beerList.appendChild(listBeer)
   }
   })
@@ -79,4 +83,16 @@ function addNewReview(){
     // clear the value entered in the text area
     review.value = ""
   })
+}
+
+// 4. Click a beer on the menu and have it load on the main page
+function displayMenuBeer(){
+  const beerMenuContainer = document.getElementById('beer-list');
+
+  beerMenuContainer.addEventListener('click', function (e) {
+    if (e.target.classList.contains('beer-menu')) {
+      //get the index and call the fetchDisplayBeer function, passing in the data-index as its argument
+      fetchDisplayBeer(e.target.dataset.beerIndex);
+    }
+  });
 }
