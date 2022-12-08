@@ -35,6 +35,7 @@ function fetchDisplayBeer(index){
     for (const review of reviews){
       const listReview = document.createElement("li")
       listReview.textContent = review;
+      listReview.classList.add("beer-review");
       beerReviews.appendChild(listReview)
     }
   })
@@ -76,6 +77,7 @@ function addNewReview(){
     // create a <li></li> and assign it the text entered in the textarea
     const reviewListItem = document.createElement("li")
     reviewListItem.textContent = review.value;
+    reviewListItem.classList.add("beer-review");
     
     const beerReviews = document.getElementById("review-list");
     beerReviews.appendChild(reviewListItem);
@@ -96,3 +98,15 @@ function displayMenuBeer(){
     }
   });
 }
+
+// 5. Remove a review when it's clicked
+function removeReview(){
+  const reviewContainer = document.getElementById("review-list")
+  reviewContainer.addEventListener("click", (e) => {
+    if (e.target.classList.contains("beer-review")) {
+      console.log(e.target.remove())
+    }
+  })
+}
+
+removeReview()
