@@ -1,9 +1,9 @@
 // Code here
-const baseURL = "http://localhost:3000"
+const baseURL = "http://localhost:3000/beers"
 
 
 // 1. Add the first beer's details in the HTMl when the page loads
-fetch(`${baseURL}/beers/1`)
+fetch(`${baseURL}/1`)
 .then(res => res.json())
 .then(data => {
   // Show the first beer on page load
@@ -11,8 +11,8 @@ fetch(`${baseURL}/beers/1`)
   beerName.textContent = data.name;
   
   const beerImage = document.getElementById("beer-image");
-  beerImage.setAttribute("src", data.image_url);
-  beerImage.setAttribute("alt", data.name);
+  beerImage.src =  data.image_url;
+  beerImage.alt = data.name;
 
   const beerDescription = document.getElementById("beer-description");
   beerDescription.textContent = data.description;
@@ -24,6 +24,27 @@ fetch(`${baseURL}/beers/1`)
     const listReview = document.createElement("li")
     listReview.textContent = review;
     beerReviews.appendChild(listReview)
+  }
+})
+.catch(err => console.log("Error: ", err))
+
+
+// 2. Show a menu of all beers
+fetch(`${baseURL}`)
+.then(res => res.json())
+.then(data => {
+  // map over the returned array to get just the names
+  const beerNames = data.map(beer => beer.name)
+
+  const beerList = document.getElementById("beer-list")
+  beerList.replaceChildren()
+  
+  for (const beerName of beerNames){
+    const listBeer = document.createElement("li")
+    listBeer.textContent = beerName
+  // add a dataset as an attribute inorder to use that index when fetching a beer from the database
+    listBeer.dataset.beerIndex = beerNames.indexOf(beerName) + 1;
+    beerList.appendChild(listBeer)
   }
 })
 .catch(err => console.log("Error: ", err))
