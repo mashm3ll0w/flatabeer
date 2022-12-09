@@ -10,8 +10,11 @@ showMenu();
 // 3. Add New Review
 addNewReview();
 
-// 4. Display Menu Beer
-displayMenuBeer();
+// 4. Show a beer in the main display when clicked from the Beer menu
+const beerMenuContainer = document.getElementById('beer-list').addEventListener("click", displayMenuBeer);
+
+// 5. Remove a review
+const reviewContainer = document.getElementById("review-list").addEventListener("click", removeReview)
 
 // 1. Function to fetch the beer that will get displayed as the default
 function fetchDisplayBeer(index){
@@ -87,26 +90,17 @@ function addNewReview(){
   })
 }
 
-// 4. Click a beer on the menu and have it load on the main page
-function displayMenuBeer(){
-  const beerMenuContainer = document.getElementById('beer-list');
-
-  beerMenuContainer.addEventListener('click', function (e) {
-    if (e.target.classList.contains('beer-menu')) {
-      //get the index and call the fetchDisplayBeer function, passing in the data-index as its argument
-      fetchDisplayBeer(e.target.dataset.beerIndex);
-    }
-  });
+// 4. Function to show a beer on the main page when clicked from the Menu
+function displayMenuBeer(e){
+  if (e.target.classList.contains('beer-menu')) {
+    //get the index and call the fetchDisplayBeer function, passing in the data-index as its argument
+    fetchDisplayBeer(e.target.dataset.beerIndex);
+  }
 }
 
-// 5. Remove a review when it's clicked
-function removeReview(){
-  const reviewContainer = document.getElementById("review-list")
-  reviewContainer.addEventListener("click", (e) => {
-    if (e.target.classList.contains("beer-review")) {
-      console.log(e.target.remove())
-    }
-  })
+// 5. Function to remove a review when it's clicked
+function removeReview(e){
+  if (e.target.classList.contains("beer-review")) {
+    console.log(e.target.remove())
+  }
 }
-
-removeReview()
