@@ -16,6 +16,14 @@ const beerMenuContainer = document.getElementById('beer-list').addEventListener(
 // 5. Remove a review
 const reviewContainer = document.getElementById("review-list").addEventListener("click", removeReview)
 
+// 6. Update a beer's description
+const submitBtn = document.querySelector("#description-form button")
+.addEventListener("click",updateDescription)
+
+
+
+// FUNCTIONS
+
 // 1. Function to fetch the beer that will get displayed as the default
 function fetchDisplayBeer(index){
   fetch(`${baseURL}/${index}`)
@@ -24,6 +32,7 @@ function fetchDisplayBeer(index){
     // Show the first beer on page load
     const beerName = document.getElementById("beer-name");
     beerName.textContent = data.name;
+    beerName.dataset.id = data.id;
     
     const beerImage = document.getElementById("beer-image");
     beerImage.src =  data.image_url;
@@ -103,4 +112,29 @@ function removeReview(e){
   if (e.target.classList.contains("beer-review")) {
     console.log(e.target.remove())
   }
+}
+
+// 6. Function to update a beer's review
+function updateDescription(e){
+  e.preventDefault()
+  const beerID = document.getElementById("beer-name").dataset.id;
+  const newDescription = document.getElementById("description").value;
+  
+  fetch(`${baseURL}/${beerID}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      "description": newDescription
+    })
+  }).then(res => res.json())
+  .then(data => console.log(data))
+  .catch(err => console.log("Error: ", err))
+
+  // clear out the description from the textbox
+  newDescription.value = "";
+
+  // Reload the page with the updated description
+  fetchDisplayBeer(beerID);
 }
