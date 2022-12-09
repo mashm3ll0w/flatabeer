@@ -2,13 +2,13 @@
 const baseURL = "http://localhost:3000/beers"
 
 // 1. Add the first beer's details in the HTMl when the page loads
-fetchDisplayBeer(1);
+fetchDisplayBeer();
 
 // 2. Show a menu of all beers
 showMenu();
 
 // 3. Add New Review
-addNewReview();
+const submitReviewBtn = document.querySelector("#review-form button").addEventListener("click",addNewReview)
 
 // 4. Show a beer in the main display when clicked from the Beer menu
 const beerMenuContainer = document.getElementById('beer-list').addEventListener("click", displayMenuBeer);
@@ -25,7 +25,7 @@ const submitBtn = document.querySelector("#description-form button")
 // FUNCTIONS
 
 // 1. Function to fetch the beer that will get displayed as the default
-function fetchDisplayBeer(index){
+function fetchDisplayBeer(index = 1){
   fetch(`${baseURL}/${index}`)
   .then(res => res.json())
   .then(data => {
@@ -78,25 +78,52 @@ function showMenu(){
 }
 
 
-// 3. Add a review when the review form is submitted
-function addNewReview(){
-    const submitReviewBtn = document.querySelector("#review-form button")
-    submitReviewBtn.addEventListener("click", (e) => {
-      e.preventDefault()
+// 3. Function to add a new review, both in the Database and in the page
+function addNewReview(e){
+  e.preventDefault()
+  const beerID = document.getElementById("beer-name").dataset.id;
+  const review = document.getElementById("review");
 
-    const review = document.getElementById("review");
-    
-    // create a <li></li> and assign it the text entered in the textarea
-    const reviewListItem = document.createElement("li")
-    reviewListItem.textContent = review.value;
-    reviewListItem.classList.add("beer-review");
-    
-    const beerReviews = document.getElementById("review-list");
-    beerReviews.appendChild(reviewListItem);
-    
-    // clear the value entered in the text area
-    review.value = ""
-  })
+  const existingReviews = document.getElementsByClassName("beer-review")
+  const reviewsArray = []
+  for (const review of existingReviews){
+    reviewsArray.push(review.textContent)
+  }
+  
+  if(review.value === ""){
+    alert("Invalid review")
+  }else{
+    reviewsArray.push(review.value)
+    console.log(reviewsArray);
+
+    fetch(`${baseURL}/${beerID}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        "reviews": reviewsArray
+      })
+    }).then(res => res.json())
+    .then(data => console.log(data))
+    .catch(err, console.log("Error :", err))
+
+    // Clear out the value inside the review field
+    review.value = "";
+
+    // update the page with the new review
+    fetchDisplayBeer(beerID);
+  }
+  // create a <li></li> and assign it the text entered in the textarea
+  // const reviewListItem = document.createElement("li")
+  // reviewListItem.textContent = review.value;
+  // reviewListItem.classList.add("beer-review");
+  
+  // const beerReviews = document.getElementById("review-list");
+  // beerReviews.appendChild(reviewListItem);
+  
+  // // clear the value entered in the text area
+  // review.value = ""
 }
 
 // 4. Function to show a beer on the main page when clicked from the Menu

@@ -3,13 +3,14 @@
     {
       "id": 1,
       "name": "Oh So Flattening",
-      "description": "The best thing since water....",
+      "description": "Twice is not a coincidence",
       "image_url": "https://i.ibb.co/wQ4G0w1/flatiron-brew.png",
       "reviews": [
         "It's flat! Just the way I like it!!",
         "Is this the real beer, is this just fantasy?",
         "I've always hated bubbles going up my nose, so this is absolutely delightful.",
-        "Flat straight out of the bottle! No more waiting for the fizziness to subside. Thank you FlattaBeer!! I love you!!!"
+        "Flat straight out of the bottle! No more waiting for the fizziness to subside. Thank you FlattaBeer!! I love you!!!",
+        "Juju Drink"
       ]
     },
     {
@@ -34,10 +35,11 @@
     {
       "id": 4,
       "name": "Electric India",
-      "description": "Tastes like memories",
+      "description": "Smells like teen spirit",
       "image_url": "https://images.punkapi.com/v2/6.png",
       "reviews": [
-        "I remember nothing"
+        "I remember nothing",
+        "Sweet"
       ]
     },
     {
@@ -57,7 +59,8 @@
       "image_url": "https://images.punkapi.com/v2/9.png",
       "reviews": [
         "I like to drink this while watching TV",
-        "A beer like no other, best served hot"
+        "A beer like no other, best served hot",
+        "Juice"
       ]
     },
     {
@@ -76,14 +79,13 @@
       "image_url": "https://images.punkapi.com/v2/keg.png",
       "reviews": [
         "Woe is me, how I long for the days of yore",
-        "Reminds me of that time I wasted all of my time",
-        "It's a flavor that makes you wonder: 'Who is the boss: Angela or Tony?'"
+        "Drip Drip"
       ]
     },
     {
       "id": 9,
       "name": "Arcade Nation",
-      "description": "Running the knife-edge between an India Pale Ale and a Stout, this particular style is one we truly love. Black IPAs are a great showcase for the skill of our brew team, balancing so many complex and twisting flavours in the same moment. The citrus, mango and pine from the hops – three of our all-time favourites – play off against the roasty dryness from the malt bill at each and every turn.",
+      "description": "Play nice",
       "image_url": "https://images.punkapi.com/v2/12.png",
       "reviews": [
         "Pew pew"
@@ -96,7 +98,8 @@
       "image_url": "https://images.punkapi.com/v2/13.png",
       "reviews": [
         "Like autumn leaves readying themselves for the winter sun",
-        "Beep beep, you're having a beer"
+        "Beep beep, you're having a beer",
+        "Loooooove"
       ]
     }
   ]
