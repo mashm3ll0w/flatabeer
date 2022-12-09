@@ -119,22 +119,27 @@ function updateDescription(e){
   e.preventDefault()
   const beerID = document.getElementById("beer-name").dataset.id;
   const newDescription = document.getElementById("description").value;
+
+  if (newDescription !== ""){
+    fetch(`${baseURL}/${beerID}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        "description": newDescription
+      })
+    }).then(res => res.json())
+    .then(data => console.log(data))
+    .catch(err => console.log("Error: ", err))
   
-  fetch(`${baseURL}/${beerID}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      "description": newDescription
-    })
-  }).then(res => res.json())
-  .then(data => console.log(data))
-  .catch(err => console.log("Error: ", err))
-
-  // clear out the description from the textbox
-  newDescription.value = "";
-
-  // Reload the page with the updated description
-  fetchDisplayBeer(beerID);
+    // clear out the description from the textbox
+    newDescription.value = "";
+  
+    // Reload the page with the updated description
+    fetchDisplayBeer(beerID);
+  }
+  else {
+    alert("Invalid descritption");
+  }
 }
