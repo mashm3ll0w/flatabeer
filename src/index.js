@@ -17,8 +17,7 @@ const beerMenuContainer = document.getElementById('beer-list').addEventListener(
 const reviewContainer = document.getElementById("review-list").addEventListener("click", removeReview)
 
 // 6. Update a beer's description
-const submitBtn = document.querySelector("#description-form button")
-.addEventListener("click",updateDescription)
+const submitBtn = document.querySelector("#description-form button").addEventListener("click", updateDescription)
 
 
 
@@ -30,28 +29,33 @@ function fetchDisplayBeer(index = 1){
   .then(res => res.json())
   .then(data => {
     // Show the first beer on page load
-    const beerName = document.getElementById("beer-name");
-    beerName.textContent = data.name;
-    beerName.dataset.id = data.id;
-    
-    const beerImage = document.getElementById("beer-image");
-    beerImage.src =  data.image_url;
-    beerImage.alt = data.name;
-
-    const beerDescription = document.getElementById("beer-description");
-    beerDescription.textContent = data.description;
-
-    const beerReviews = document.getElementById("review-list")
-    beerReviews.replaceChildren()
-    const reviews = data.reviews
-    for (const review of reviews){
-      const listReview = document.createElement("li")
-      listReview.textContent = review;
-      listReview.classList.add("beer-review");
-      beerReviews.appendChild(listReview)
-    }
+    populateData(data);
   })
-  .catch(err => console.log("Error: ", err))
+  // .catch(err => console.log("Error: ", err))
+}
+
+// function to populate the data returned from the db
+function populateData(data){
+  const beerName = document.getElementById("beer-name");
+  beerName.textContent = data.name;
+  beerName.dataset.id = data.id;
+  
+  const beerImage = document.getElementById("beer-image");
+  beerImage.src =  data.image_url;
+  beerImage.alt = data.name;
+
+  const beerDescription = document.getElementById("beer-description");
+  beerDescription.textContent = data.description;
+
+  const beerReviews = document.getElementById("review-list")
+  beerReviews.replaceChildren()
+  const reviews = data.reviews
+  for (const review of reviews){
+    const listReview = document.createElement("li")
+    listReview.textContent = review;
+    listReview.classList.add("beer-review");
+    beerReviews.appendChild(listReview)
+  }
 }
 
 // 2. Function to fetch and render a menu of all beers
@@ -90,9 +94,7 @@ function addNewReview(e){
     reviewsArray.push(review.textContent)
   }
   
-  if(review.value === ""){
-    alert("Invalid review")
-  }else{
+  if(review.value !== ""){
     reviewsArray.push(review.value)
     console.log(reviewsArray);
 
@@ -104,30 +106,26 @@ function addNewReview(e){
       body: JSON.stringify({
         "reviews": reviewsArray
       })
-    }).then(res => res.json())
-    .then(data => console.log(data))
+    }).then(res => {
+      e.preventDefault()
+      res.json()
+    })
+    .then(data => {
+      e.preventDefault()
+      populateData(data)
+      review.value = "";
+    })
     .catch(err, console.log("Error :", err))
-
-    // Clear out the value inside the review field
-    review.value = "";
-
-    // update the page with the new review
     fetchDisplayBeer(beerID);
   }
-  // create a <li></li> and assign it the text entered in the textarea
-  // const reviewListItem = document.createElement("li")
-  // reviewListItem.textContent = review.value;
-  // reviewListItem.classList.add("beer-review");
-  
-  // const beerReviews = document.getElementById("review-list");
-  // beerReviews.appendChild(reviewListItem);
-  
-  // // clear the value entered in the text area
-  // review.value = ""
+  else{
+    alert("Invalid review")
+  }
 }
 
 // 4. Function to show a beer on the main page when clicked from the Menu
 function displayMenuBeer(e){
+  e.preventDefault()
   if (e.target.classList.contains('beer-menu')) {
     //get the index and call the fetchDisplayBeer function, passing in the data-index as its argument
     fetchDisplayBeer(e.target.dataset.beerIndex);
@@ -143,7 +141,6 @@ function removeReview(e){
 
 // 6. Function to update a beer's review
 function updateDescription(e){
-  e.preventDefault()
   const beerID = document.getElementById("beer-name").dataset.id;
   const newDescription = document.getElementById("description").value;
 
@@ -156,15 +153,16 @@ function updateDescription(e){
       body: JSON.stringify({
         "description": newDescription
       })
-    }).then(res => res.json())
-    .then(data => console.log(data))
-    .catch(err => console.log("Error: ", err))
-  
-    // clear out the description from the textbox
-    newDescription.value = "";
-  
-    // Reload the page with the updated description
-    fetchDisplayBeer(beerID);
+    }).then(res => {
+      e.preventDefault()
+      res.json()
+    })
+    .then(data => {
+      e.preventDefault()
+      populateData(data)
+      newDescription.value = "";
+    })
+    fetchDisplayBeer(beerID)
   }
   else {
     alert("Invalid descritption");

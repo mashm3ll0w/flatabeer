@@ -3,14 +3,13 @@
     {
       "id": 1,
       "name": "Oh So Flattening",
-      "description": "Twice is not a coincidence",
+      "description": "A light, crisp and bitter IPA brewed with English and American hops. A small batch brewed only once.",
       "image_url": "https://i.ibb.co/wQ4G0w1/flatiron-brew.png",
       "reviews": [
         "It's flat! Just the way I like it!!",
         "Is this the real beer, is this just fantasy?",
         "I've always hated bubbles going up my nose, so this is absolutely delightful.",
-        "Flat straight out of the bottle! No more waiting for the fizziness to subside. Thank you FlattaBeer!! I love you!!!",
-        "Juju Drink"
+        "Flat straight out of the bottle! No more waiting for the fizziness to subside. Thank you FlattaBeer!! I love you!!!"
       ]
     },
     {
@@ -35,11 +34,10 @@
     {
       "id": 4,
       "name": "Electric India",
-      "description": "Smells like teen spirit",
+      "description": "Tastes like memories",
       "image_url": "https://images.punkapi.com/v2/6.png",
       "reviews": [
-        "I remember nothing",
-        "Sweet"
+        "I remember nothing"
       ]
     },
     {
@@ -59,8 +57,7 @@
       "image_url": "https://images.punkapi.com/v2/9.png",
       "reviews": [
         "I like to drink this while watching TV",
-        "A beer like no other, best served hot",
-        "Juice"
+        "A beer like no other, best served hot"
       ]
     },
     {
@@ -79,13 +76,14 @@
       "image_url": "https://images.punkapi.com/v2/keg.png",
       "reviews": [
         "Woe is me, how I long for the days of yore",
-        "Drip Drip"
+        "Reminds me of that time I wasted all of my time",
+        "It's a flavor that makes you wonder: 'Who is the boss: Angela or Tony?'"
       ]
     },
     {
       "id": 9,
       "name": "Arcade Nation",
-      "description": "Play nice",
+      "description": "Running the knife-edge between an India Pale Ale and a Stout, this particular style is one we truly love. Black IPAs are a great showcase for the skill of our brew team, balancing so many complex and twisting flavours in the same moment. The citrus, mango and pine from the hops – three of our all-time favourites – play off against the roasty dryness from the malt bill at each and every turn.",
       "image_url": "https://images.punkapi.com/v2/12.png",
       "reviews": [
         "Pew pew"
@@ -98,8 +96,7 @@
       "image_url": "https://images.punkapi.com/v2/13.png",
       "reviews": [
         "Like autumn leaves readying themselves for the winter sun",
-        "Beep beep, you're having a beer",
-        "Loooooove"
+        "Beep beep, you're having a beer"
       ]
     }
   ]
