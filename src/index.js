@@ -135,12 +135,13 @@ function displayMenuBeer(e){
 // 5. Function to remove a review when it's clicked
 function removeReview(e){
   if (e.target.classList.contains("beer-review")) {
-    console.log(e.target.remove())
+    e.target.remove();
   }
 }
 
 // 6. Function to update a beer's review
 function updateDescription(e){
+  e.preventDefault()
   const beerID = document.getElementById("beer-name").dataset.id;
   const newDescription = document.getElementById("description").value;
 
