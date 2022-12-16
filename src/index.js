@@ -110,6 +110,34 @@ function displayMenuBeer(e){
   getBeer(e.target.dataset.id)
 }
 
+// update the beer description in the DB and the page
+document.getElementById("description-form").addEventListener("submit", updateDescription)
+
+function updateDescription(e){
+  e.preventDefault()
+  const beerID = document.querySelector("#beer-name").dataset.id
+  if (e.target.description.value){
+    e.preventDefault()
+    fetch(`${baseURl}/${beerID}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept" : "application/json"
+      },
+      body: JSON.stringify({
+        "description": e.target.description.value
+      })
+    }).then(res => res.json())
+    .then(beer => beer)
+    .catch(error => console.log("Error: ", error.message))
+
+    document.getElementById("beer-description").textContent = e.target.description.value
+    }
+  else{
+    alert("Invalid description")
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   getBeer();
   getBeerMenu();
