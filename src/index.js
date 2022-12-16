@@ -27,7 +27,31 @@ function populateBeerData(beer){
   }
 }
 
+// Show beer menu
+function getBeerMenu(){
+  fetch(baseURl)
+  .then(res => res.json())
+  .then(beers => {
+    const beerList = beers.map(beer => beer.name)
+    renderBeerMenu(beerList)
+  })
+  .catch(error => console.log("Error: ", error.message))
+}
+
+// Populate the beer menu
+function renderBeerMenu(beerList){
+  document.getElementById("beer-list").replaceChildren()
+  const beerMenu = document.getElementById("beer-list")
+  beerList.forEach(beer => {
+    const li = document.createElement("li")
+    li.textContent = beer
+    beerMenu.appendChild(li)
+  });
+
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   getBeer();
+  getBeerMenu();
 })
 
