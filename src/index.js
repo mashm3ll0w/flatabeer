@@ -46,6 +46,8 @@ function renderBeerMenu(beerList){
   beerList.forEach(beer => {
     const li = document.createElement("li")
     li.textContent = beer
+    li.dataset.id = beerList.indexOf(beer) + 1
+    li.addEventListener("click", displayMenuBeer)
     beerMenu.appendChild(li)
   });
 }
@@ -66,6 +68,11 @@ function addReview(e){
 
 function removeReview(e){
   e.target.remove()
+}
+
+// display a beer from the menu in the main page
+function displayMenuBeer(e){
+  getBeer(e.target.dataset.id)
 }
 
 document.addEventListener("DOMContentLoaded", () => {
