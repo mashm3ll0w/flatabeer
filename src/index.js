@@ -22,6 +22,7 @@ function populateBeerData(beer){
   for (let review of beer.reviews){
     const reviewList = beerDiv.querySelector("#review-list")
     const li = document.createElement("li")
+    li.addEventListener("click", removeReview)
     li.textContent = review
     reviewList.appendChild(li)
   }
@@ -58,8 +59,13 @@ function addReview(e){
   const reviewList = document.getElementById("review-list")
   const li = document.createElement("li")
   li.textContent = e.target.review.value
+  li.addEventListener("click", removeReview)
   reviewList.appendChild(li)
   e.target.review.value = ""
+}
+
+function removeReview(e){
+  e.target.remove()
 }
 
 document.addEventListener("DOMContentLoaded", () => {
