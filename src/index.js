@@ -47,7 +47,19 @@ function renderBeerMenu(beerList){
     li.textContent = beer
     beerMenu.appendChild(li)
   });
+}
 
+// Add a new review
+const reviewForm = document.getElementById("review-form")
+reviewForm.addEventListener("submit", addReview)
+
+function addReview(e){
+  e.preventDefault()
+  const reviewList = document.getElementById("review-list")
+  const li = document.createElement("li")
+  li.textContent = e.target.review.value
+  reviewList.appendChild(li)
+  e.target.review.value = ""
 }
 
 document.addEventListener("DOMContentLoaded", () => {
